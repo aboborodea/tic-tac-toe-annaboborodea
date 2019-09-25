@@ -12,6 +12,41 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+      <h1>tic-tac-toe</h1>
+      <table id="table">
+    <tr class="row">
+        <td id="0"></td>
+        <td id="1"></td>
+        <td id="2"></td>
+    </tr>
+    <tr class="row">
+        <td id="3"></td>
+        <td id="4"></td>
+        <td id="5"></td>
+    </tr>
+    <tr class="row">
+        <td id="6"></td>
+        <td id="7"></td>
+        <td id="8"></td>
+    </tr>
+</table>
+<form>
+  <input name="credentials[email]" type="text" value="an@example.email">
+  <input name="credentials[password]" type="password" value="an example password">
+  <input name="credentials[password_confirmation]" type="password" value="an example password">
+  <button>Sign Up</button>
+</form>
+
+<form>
+    <input name="credentials[email]" type="text" value="an@example.email">
+    <input name="credentials[password]" type="password" value="an example password">
+    <button>Sign In</button>
+</form>
+
+<form>
+  <input name="passwords[old]" type="password">
+  <input name="passwords[new]" type="password">
+  <button>Change Password</button>
+</form>
     </body>
 </html>
