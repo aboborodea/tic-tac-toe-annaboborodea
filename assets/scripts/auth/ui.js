@@ -11,7 +11,7 @@ const successMessage = function (newText) {
 
 const failureMessage = function (newText) {
   $('#message').text(newText)
-  $('#message').removeClass('sucess')
+  $('#message').removeClass('success')
   $('#message').addClass('failure')
 }
 
