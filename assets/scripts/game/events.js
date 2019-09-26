@@ -12,9 +12,12 @@ const onTakeTurn = function (event) {
   //   .then(ui.onShowSuccess)
   //   .catch(ui.onError)
 }
+const onNewGame = function (event) {
+  event.preventDefault()
+  console.log('new game')
+}
 
 module.exports = {
-
-  onTakeTurn
-
+  onTakeTurn,
+  onNewGame
 }
