@@ -1,16 +1,20 @@
 'use strict'
 const config = require('../config')
-// require 'store' so we have access to our 'token'
-// so the API knows who we are
-// const store = require('../store')
+const store = require('../store')
 
 const newGame = function () {
   return $.ajax({
     method: 'POST',
-    url: config.apiUrl + '/games'
+    url: config.apiUrl + '/games',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: '{}'
   })
 }
+const updateGame = function () {
 
+}
 module.exports = {
   newGame
 }

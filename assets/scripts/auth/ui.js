@@ -51,6 +51,15 @@ const onSignOutSuccess = function () {
 const onSignOutFailure = function () {
   failureMessage('Sign out failed')
 }
+
+const onNewGameSuccess = function (responseData) {
+  successMessage('Created new game successfully!' + responseData)
+  store.game = responseData.game
+}
+
+const onNewGameFailure = function () {
+  failureMessage('New game not created.')
+}
 module.exports = {
   onSignUpSuccess,
   onSignUpFailure,
@@ -59,5 +68,7 @@ module.exports = {
   onChangePasswordSuccess,
   onChangePasswordFailure,
   onSignOutSuccess,
-  onSignOutFailure
+  onSignOutFailure,
+  onNewGameSuccess,
+  onNewGameFailure
 }
