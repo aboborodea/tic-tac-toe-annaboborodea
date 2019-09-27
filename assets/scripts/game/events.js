@@ -20,11 +20,25 @@ const onTakeTurn = function (event) {
 }
 
 const onClickBoard = function (event) {
+  // prevent page from refreshing
   event.preventDefault()
+  // declare variable 'index' as the attribute data index on the clicked square
   const index = $(event.target).attr('data-index')
+  // declare variable 'value' as the current player (inside of store)
   const value = store.currentPlayer
-  if ($(event.target).text() === '') {
+  // if the cell that is clicked is empty, mark an x
+  // and the board is not full
+  if ($(event.target).text() === '' && !checkIfBoardFull()) {
+    // add the player to the board
     $(event.target).text(store.currentPlayer)
+    // check for winner
+    const winningMessage = checkIfWinner() // use the return value of checkIfWinner
+    console.log('someoneWins before we run checkWinner', someoneWins)
+    console.log('cells before we run checkWinner', cells)
+    if (someoneWins === true) {
+      $('#message').text(winningMessage)
+    }
+    // invoke change player function to alternate between x and o
     changePlayer()
     // update API sending index, current player, game over (true or false)
     api.updateGame(index, value)
@@ -32,6 +46,10 @@ const onClickBoard = function (event) {
       .catch(ui.onUpdateGameFailure)
   } else {
     console.log('theres an x here already')
+  }
+  checkIfWinner()
+  if (someoneWins === true) {
+    $('#message').text('Winner')
   }
 }
 
@@ -45,44 +63,61 @@ const changePlayer = function () {
 }
 
 // to check winning combonations
-const checkWinner = function () {
+let someoneWins = false
+const checkIfWinner = function () {
   if (cells[0] === 'x' && cells[1] === 'x' && cells[2] === 'x') {
+    someoneWins = true
     return 'Player X has won!'
   } else if (cells[3] === 'x' && cells[4] === 'x' && cells[5] === 'x') {
+    someoneWins = true
     return 'Player X won!'
   } else if (cells[6] === 'x' && cells[7] === 'x' && cells[8] === 'x') {
+    someoneWins = true
     return 'Player X won!'
   } else if (cells[0] === 'x' && cells[3] === 'x' && cells[6] === 'x') {
+    someoneWins = true
     return 'Player X won!'
   } else if (cells[1] === 'x' && cells[4] === 'x' && cells[7] === 'x') {
+    someoneWins = true
     return 'Player X won!'
   } else if (cells[2] === 'x' && cells[5] === 'x' && cells[8] === 'x') {
+    someoneWins = true
     return 'Player X won!'
   } else if (cells[0] === 'x' && cells[4] === 'x' && cells[8] === 'x') {
+    someoneWins = true
     return 'Player X won!'
   } else if (cells[2] === 'x' && cells[4] === 'x' && cells[6] === 'x') {
+    someoneWins = true
     return 'Player X won!'
   }
   if (cells[0] === 'o' && cells[1] === 'o' && cells[2] === 'o') {
+    someoneWins = true
     return 'Player O has won!'
   } else if (cells[3] === 'o' && cells[4] === 'o' && cells[5] === 'o') {
+    someoneWins = true
     return 'Player O won!'
   } else if (cells[6] === 'o' && cells[7] === 'o' && cells[8] === 'o') {
+    someoneWins = true
     return 'Player O won!'
   } else if (cells[0] === 'o' && cells[3] === 'o' && cells[6] === 'o') {
+    someoneWins = true
     return 'Player O won!'
   } else if (cells[1] === 'o' && cells[4] === 'o' && cells[7] === 'o') {
+    someoneWins = true
     return 'Player O won!'
   } else if (cells[2] === 'o' && cells[5] === 'o' && cells[8] === 'o') {
+    someoneWins = true
     return 'Player O won!'
   } else if (cells[0] === 'o' && cells[4] === 'o' && cells[8] === 'o') {
+    someoneWins = true
     return 'Player O won!'
   } else if (cells[2] === 'o' && cells[4] === 'o' && cells[6] === 'o') {
+    someoneWins = true
     return 'Player O won!'
   }
 }
 // check if board is full function
-const boardFull = function () {
+const checkIfBoardFull = function () {
   for (let i = 0; i < cells.length; i++) {
     if (cells[i] === '') {
       return false
@@ -105,5 +140,6 @@ module.exports = {
   onNewGame,
   onClickBoard,
   changePlayer,
-  checkWinner
+  checkIfWinner,
+  checkIfBoardFull
 }
