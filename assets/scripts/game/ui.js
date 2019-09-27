@@ -15,7 +15,7 @@ const failureMessage = function (newText) {
 }
 
 const onNewGameSuccess = function (responseData) {
-  successMessage('Created new game successfully!' + responseData)
+  successMessage(`Created new game successfully! It's ${store.currentPlayer}'s turn!`)
   store.game = responseData.game
 }
 

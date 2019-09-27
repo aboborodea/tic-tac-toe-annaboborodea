@@ -14,7 +14,3 @@ $(() => {
   $('#new-game').on('submit', gameEvents.onNewGame)
   $('.game-button').on('click', gameEvents.onClickBoard)
 })
-// create an empty array
-// const gameBoard = ['', '', '', '', '', '', '', '', '']
-// add click event to 9 blocks
-// for even moves, select x and for odd moves select y

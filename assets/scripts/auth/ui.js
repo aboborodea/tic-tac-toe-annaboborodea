@@ -33,8 +33,8 @@ const onSignInSuccess = function (responseData) {
   store.user = responseData.user
   console.log('store is', store)
   gameApi.newGame()
-    .then(onNewGameSuccess)
-    .catch()
+    .then(gameUi.onNewGameSuccess)
+    .catch(gameUi.onNewGameFailure)
 }
 
 const onSignInFailure = function () {
