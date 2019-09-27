@@ -1,8 +1,7 @@
 'use strict'
-
+const store = require('../store')
 const api = require('./api.js')
 const ui = require('./ui.js')
-const getFormFields = require('../../../lib/get-form-fields.js')
 
 const onTakeTurn = function (event) {
   event.preventDefault()
@@ -16,24 +15,24 @@ const onNewGame = function (event) {
   console.log('new game')
 }
 
-let currentPlayer = 'x'
 const changePlayer = function () {
-  if (currentPlayer === 'x') {
-    currentPlayer = 'o'
+  if (store.currentPlayer === 'x') {
+    store.currentPlayer = 'o'
   } else {
-    currentPlayer = 'x'
+    store.currentPlayer = 'x'
   }
 }
 
 const onClickBoard = function (event) {
   event.preventDefault()
-const index = $()
-  api.updateGame()
-    .then(ui.onUpdateGameSuccess)
-    .catch(ui.onUpdateGameFailure)
+  const index = $(event.target).attr('data-index')
+  const value = store.currentPlayer
   if ($(event.target).text() === '') {
-    $(event.target).text(currentPlayer)
+    $(event.target).text(store.currentPlayer)
     changePlayer()
+    api.updateGame(index, value)
+      .then(ui.onUpdateGameSuccess)
+      .catch(ui.onUpdateGameFailure)
   } else {
     console.log('theres an x here already')
   }
@@ -52,6 +51,5 @@ module.exports = {
   onTakeTurn,
   onNewGame,
   onClickBoard,
-  changePlayer,
-  currentPlayer
+  changePlayer
 }

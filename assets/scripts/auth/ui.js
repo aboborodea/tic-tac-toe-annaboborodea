@@ -2,6 +2,8 @@
 
 // require store object so that we can save the user and their token
 const store = require('../store')
+const gameApi = require('../game/api.js')
+const gameUi = require('../game/ui.js')
 
 const successMessage = function (newText) {
   $('#message').text(newText)
@@ -30,6 +32,9 @@ const onSignInSuccess = function (responseData) {
   // so we can use it later from any file
   store.user = responseData.user
   console.log('store is', store)
+  gameApi.newGame()
+    .then(onNewGameSuccess)
+    .catch()
 }
 
 const onSignInFailure = function () {
@@ -51,15 +56,6 @@ const onSignOutSuccess = function () {
 const onSignOutFailure = function () {
   failureMessage('Sign out failed')
 }
-
-const onNewGameSuccess = function (responseData) {
-  successMessage('Created new game successfully!' + responseData)
-  store.game = responseData.game
-}
-
-const onNewGameFailure = function () {
-  failureMessage('New game not created.')
-}
 module.exports = {
   onSignUpSuccess,
   onSignUpFailure,
@@ -68,7 +64,5 @@ module.exports = {
   onChangePasswordSuccess,
   onChangePasswordFailure,
   onSignOutSuccess,
-  onSignOutFailure,
-  onNewGameSuccess,
-  onNewGameFailure
+  onSignOutFailure
 }
