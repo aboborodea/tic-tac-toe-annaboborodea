@@ -1,6 +1,6 @@
 'use strict'
 const store = require('../store')
-const gameEvents = require('./events')
+// const gameEvents = require('./events')
 
 const successMessage = function (newText) {
   $('#message').text(newText)
@@ -24,7 +24,8 @@ const onNewGameFailure = function () {
 }
 
 const onUpdateGameSuccess = function (responseData) {
-  successMessage(gameEvents.currentPlayer + 'its your turn!')
+  // successMessage(gameEvents.currentPlayer + 'its your turn!')
+  console.log('update success response', responseData)
   store.game = responseData.game
   console.log(store.game)
 }

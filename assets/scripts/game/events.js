@@ -3,7 +3,12 @@ const store = require('../store')
 const api = require('./api.js')
 const ui = require('./ui.js')
 
+// ---------------------------------------------------------------------import
+
 const cells = ['', '', '', '', '', '', '', '', '']
+let someoneWins = false
+
+// -----------------------------------------------------------------empty array
 
 // to start a new game
 const onNewGame = function (event) {
@@ -24,17 +29,21 @@ const onClickBoard = function (event) {
   event.preventDefault()
   // declare variable 'index' as the attribute data index on the clicked square
   const index = $(event.target).attr('data-index')
+  console.log('index is', index)
   // declare variable 'value' as the current player (inside of store)
   const value = store.currentPlayer
   // if the cell that is clicked is empty, mark an x
   // and the board is not full
+  // ---------------------------------------------------------------------------
   if ($(event.target).text() === '' && !checkIfBoardFull()) {
     // add the player to the board
     $(event.target).text(store.currentPlayer)
+    cells[index] = store.currentPlayer
     // check for winner
-    const winningMessage = checkIfWinner() // use the return value of checkIfWinner
     console.log('someoneWins before we run checkWinner', someoneWins)
     console.log('cells before we run checkWinner', cells)
+    const winningMessage = checkIfWinner() // use the return value of checkIfWinner
+
     if (someoneWins === true) {
       $('#message').text(winningMessage)
     }
@@ -45,8 +54,9 @@ const onClickBoard = function (event) {
       .then(ui.onUpdateGameSuccess)
       .catch(ui.onUpdateGameFailure)
   } else {
-    console.log('theres an x here already')
+    console.log('theres an x/o here already')
   }
+  // -----------------------------------------------------------change HTML text
   checkIfWinner()
   if (someoneWins === true) {
     $('#message').text('Winner')
@@ -61,9 +71,19 @@ const changePlayer = function () {
     store.currentPlayer = 'x'
   }
 }
+// check if board is full function
+const checkIfBoardFull = function () {
+  for (let i = 0; i < cells.length; i++) {
+    if (cells[i] === '') {
+      return false
+    }
+  }
+  console.log('the gameboard is true')
+  return true
+}
 
-// to check winning combonations
-let someoneWins = false
+// ----------------------------------------------------------------------------
+
 const checkIfWinner = function () {
   if (cells[0] === 'x' && cells[1] === 'x' && cells[2] === 'x') {
     someoneWins = true
@@ -115,15 +135,6 @@ const checkIfWinner = function () {
     someoneWins = true
     return 'Player O won!'
   }
-}
-// check if board is full function
-const checkIfBoardFull = function () {
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i] === '') {
-      return false
-    }
-  }
-  return true
 }
 
 // 1. if (we have a game) {}

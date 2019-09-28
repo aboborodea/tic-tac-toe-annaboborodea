@@ -7,14 +7,14 @@ const gameUi = require('../game/ui.js')
 
 const successMessage = function (newText) {
   $('#message').text(newText)
-  $('#message').removeClass('failure')
-  $('#message').addClass('success')
+  // $('#message').removeClass('failure')
+  // $('#message').addClass('success')
 }
 
 const failureMessage = function (newText) {
   $('#message').text(newText)
-  $('#message').removeClass('success')
-  $('#message').addClass('failure')
+  // $('#message').removeClass('success')
+  // $('#message').addClass('failure')
 }
 
 const onSignUpSuccess = function () {
@@ -24,13 +24,13 @@ const onSignUpSuccess = function () {
 const onSignUpFailure = function () {
   failureMessage('Sign up failed')
 }
-
+// response Data is information back from the server (a user with email id and token)
 const onSignInSuccess = function (responseData) {
   successMessage('Signed in successfully!')
   console.log('responseData is', responseData)
   // save the 'user' we got from the API inside of 'store'
   // so we can use it later from any file
-  store.user = responseData.user
+  store.user = responseData.user // save the data from the server to your local
   console.log('store is', store)
   gameApi.newGame()
     .then(gameUi.onNewGameSuccess)

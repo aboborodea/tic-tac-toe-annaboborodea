@@ -2,7 +2,7 @@
 
 const config = require('../config')
 // require 'store' so we have access to our 'token'
-//so the API knows who we are
+// so the API knows who we are
 const store = require('../store')
 
 const signUp = function (formData) {
@@ -13,6 +13,7 @@ const signUp = function (formData) {
   })
 }
 
+// giving the server a request to sign in
 const signIn = function (formData) {
   return $.ajax({
     method: 'POST',
