@@ -37,7 +37,7 @@ const onSignInSuccess = function (responseData) {
   $('#get-games-history').show()
   $('#sign-up').hide()
   $('#sign-in').hide()
-  $('#change-password').hide()
+  $('#change-password').show()
   gameApi.newGame()
     .then(gameUi.onNewGameSuccess)
     .catch(gameUi.onNewGameFailure)
@@ -56,8 +56,14 @@ const onChangePasswordFailure = function () {
 }
 
 const onSignOutSuccess = function () {
+  $('.game-button').text('')
+  $('#new-game').hide()
+  $('.game-button').hide()
+  $('#get-games-history').hide()
+  $('#sign-up').show()
+  $('#sign-in').show()
+  $('#change-password').hide()
   successMessage('Signed out successfully!')
-  $('#sign-out').hide()
 }
 
 const onSignOutFailure = function () {

@@ -72,7 +72,12 @@ const changePlayer = function () {
 // ------------------------------------------------------------------empty array
 
 const onNewGame = function (event) {
+  // const index = $(event.target).attr('data-index')
   event.preventDefault()
+  console.log('new-game')
+  $('.game-button').text('')
+  onClickBoard()
+  // cells[index] = store.currentPlayer
   api.newGame()
     .then(ui.onNewGameSuccess)
     .catch(ui.onNewGameFailure)
@@ -86,7 +91,7 @@ const onTakeTurn = function (event) {
 
 const onClickBoard = function (event) {
   // prevent page from refreshing
-  event.preventDefault()
+  // event.preventDefault()
   // declare variable 'index' as the attribute data index on the clicked square
   // changePlayer()
   const index = $(event.target).attr('data-index')
@@ -104,6 +109,7 @@ const onClickBoard = function (event) {
   if (someoneWins === true) {
     console.log('WIN')
     console.log(winningMessage)
+    $(event.target).text(store.currentPlayer)
     $('#message').text('player x won')
     // if the cell that is clicked is empty and the board is not full, mark an x
   } else if ($(event.target).text() === '' && !checkIfBoardFull()) {
