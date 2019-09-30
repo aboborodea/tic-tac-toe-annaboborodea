@@ -3,14 +3,13 @@ const store = require('../store')
 const api = require('./api.js')
 const ui = require('./ui.js')
 
-// ---------------------------------------------------------------------import
+// -----------------------------------------------------------------------import
 
 const cells = ['', '', '', '', '', '', '', '', '']
 let someoneWins = false
 
-// -----------------------------------------------------------------empty array
+// ------------------------------------------------------------------empty array
 
-// to start a new game
 const onNewGame = function (event) {
   event.preventDefault()
   api.newGame()
@@ -18,7 +17,7 @@ const onNewGame = function (event) {
     .catch(ui.onNewGameFailure)
   console.log('new game')
 }
-
+// ----------------------------------------------------------to start a new game
 const onTakeTurn = function (event) {
   event.preventDefault()
   console.log(event.target.id)
@@ -32,8 +31,7 @@ const onClickBoard = function (event) {
   console.log('index is', index)
   // declare variable 'value' as the current player (inside of store)
   const value = store.currentPlayer
-  // if the cell that is clicked is empty, mark an x
-  // and the board is not full
+  // if the cell that is clicked is empty and the board is not full, mark an x
   // ---------------------------------------------------------------------------
   if ($(event.target).text() === '' && !checkIfBoardFull()) {
     // add the player to the board
@@ -59,11 +57,12 @@ const onClickBoard = function (event) {
   // -----------------------------------------------------------change HTML text
   checkIfWinner()
   if (someoneWins === true) {
-    $('#message').text('Winner')
+    // stop game and then change html
+    // .off('click')
+    $('#message').text('Winner!')
   }
 }
-
-// to change player
+// -----------------------------------------------------------   to check winner
 const changePlayer = function () {
   if (store.currentPlayer === 'x') {
     store.currentPlayer = 'o'
@@ -71,7 +70,7 @@ const changePlayer = function () {
     store.currentPlayer = 'x'
   }
 }
-// check if board is full function
+// ----------------------------------------------------------------change player
 const checkIfBoardFull = function () {
   for (let i = 0; i < cells.length; i++) {
     if (cells[i] === '') {
@@ -81,9 +80,17 @@ const checkIfBoardFull = function () {
   console.log('the gameboard is true')
   return true
 }
-
-// ----------------------------------------------------------------------------
-
+// ----------------------------------------------------to check if board is full
+const onGetGamesHistory = function (event) {
+  event.preventDefault()
+  console.log('hello')
+}
+// ----------------------------------------------------------to get game history
+const onClearGameBoard = function (event) {
+  event.preventDefault()
+  console.log('hello')
+}
+// ---------------------------------------------------------------to clear board
 const checkIfWinner = function () {
   if (cells[0] === 'x' && cells[1] === 'x' && cells[2] === 'x') {
     someoneWins = true
@@ -136,6 +143,7 @@ const checkIfWinner = function () {
     return 'Player O won!'
   }
 }
+// --------------------------------------------------------------checking winner
 
 // 1. if (we have a game) {}
 // 2. if (game is not over) {}
@@ -152,5 +160,7 @@ module.exports = {
   onClickBoard,
   changePlayer,
   checkIfWinner,
-  checkIfBoardFull
+  checkIfBoardFull,
+  onGetGamesHistory,
+  onClearGameBoard
 }
