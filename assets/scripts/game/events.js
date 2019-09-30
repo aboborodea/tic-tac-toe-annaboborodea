@@ -7,93 +7,10 @@ const ui = require('./ui.js')
 
 const cells = ['', '', '', '', '', '', '', '', '']
 let someoneWins = false
-
-// ------------------------------------------------------------------empty array
-
-const onNewGame = function (event) {
-  event.preventDefault()
-  api.newGame()
-    .then(ui.onNewGameSuccess)
-    .catch(ui.onNewGameFailure)
-  console.log('new game')
-}
-// ----------------------------------------------------------to start a new game
-const onTakeTurn = function (event) {
-  event.preventDefault()
-  console.log(event.target.id)
-}
-
-const onClickBoard = function (event) {
-  // prevent page from refreshing
-  event.preventDefault()
-  // declare variable 'index' as the attribute data index on the clicked square
-  const index = $(event.target).attr('data-index')
-  console.log('index is', index)
-  // declare variable 'value' as the current player (inside of store)
-  const value = store.currentPlayer
-  // if the cell that is clicked is empty and the board is not full, mark an x
-  // ---------------------------------------------------------------------------
-  if ($(event.target).text() === '' && !checkIfBoardFull()) {
-    // add the player to the board
-    $(event.target).text(store.currentPlayer)
-    cells[index] = store.currentPlayer
-    // check for winner
-    console.log('someoneWins before we run checkWinner', someoneWins)
-    console.log('cells before we run checkWinner', cells)
-    const winningMessage = checkIfWinner() // use the return value of checkIfWinner
-
-    if (someoneWins === true) {
-      $('#message').text(winningMessage)
-    }
-    // invoke change player function to alternate between x and o
-    changePlayer()
-    // update API sending index, current player, game over (true or false)
-    api.updateGame(index, value)
-      .then(ui.onUpdateGameSuccess)
-      .catch(ui.onUpdateGameFailure)
-  } else {
-    console.log('theres an x/o here already')
-  }
-  // -----------------------------------------------------------change HTML text
-  checkIfWinner()
-  if (someoneWins === true) {
-    // stop game and then change html
-    // .off('click')
-    $('#message').text('Winner!')
-  }
-}
-// -----------------------------------------------------------   to check winner
-const changePlayer = function () {
-  if (store.currentPlayer === 'x') {
-    store.currentPlayer = 'o'
-  } else {
-    store.currentPlayer = 'x'
-  }
-}
-// ----------------------------------------------------------------change player
-const checkIfBoardFull = function () {
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i] === '') {
-      return false
-    }
-  }
-  console.log('the gameboard is true')
-  return true
-}
-// ----------------------------------------------------to check if board is full
-const onGetGamesHistory = function (event) {
-  event.preventDefault()
-  console.log('hello')
-}
-// ----------------------------------------------------------to get game history
-const onClearGameBoard = function (event) {
-  event.preventDefault()
-  console.log('hello')
-}
-// ---------------------------------------------------------------to clear board
 const checkIfWinner = function () {
   if (cells[0] === 'x' && cells[1] === 'x' && cells[2] === 'x') {
     someoneWins = true
+    console.log('win')
     return 'Player X has won!'
   } else if (cells[3] === 'x' && cells[4] === 'x' && cells[5] === 'x') {
     someoneWins = true
@@ -116,8 +33,7 @@ const checkIfWinner = function () {
   } else if (cells[2] === 'x' && cells[4] === 'x' && cells[6] === 'x') {
     someoneWins = true
     return 'Player X won!'
-  }
-  if (cells[0] === 'o' && cells[1] === 'o' && cells[2] === 'o') {
+  } else if (cells[0] === 'o' && cells[1] === 'o' && cells[2] === 'o') {
     someoneWins = true
     return 'Player O has won!'
   } else if (cells[3] === 'o' && cells[4] === 'o' && cells[5] === 'o') {
@@ -141,9 +57,95 @@ const checkIfWinner = function () {
   } else if (cells[2] === 'o' && cells[4] === 'o' && cells[6] === 'o') {
     someoneWins = true
     return 'Player O won!'
+  } else {
+    return -1
   }
 }
-// --------------------------------------------------------------checking winner
+
+const changePlayer = function () {
+  if (store.currentPlayer === 'x') {
+    store.currentPlayer = 'o'
+  } else {
+    store.currentPlayer = 'x'
+  }
+}
+// ------------------------------------------------------------------empty array
+
+const onNewGame = function (event) {
+  event.preventDefault()
+  api.newGame()
+    .then(ui.onNewGameSuccess)
+    .catch(ui.onNewGameFailure)
+  console.log('new game')
+}
+// ----------------------------------------------------------to start a new game
+const onTakeTurn = function (event) {
+  event.preventDefault()
+  console.log(event.target.id)
+}
+
+const onClickBoard = function (event) {
+  // prevent page from refreshing
+  event.preventDefault()
+  // declare variable 'index' as the attribute data index on the clicked square
+  // changePlayer()
+  const index = $(event.target).attr('data-index')
+  console.log('index is', index)
+  // declare variable 'value' as the current player (inside of store)
+  const value = store.currentPlayer
+
+  api.updateGame(index, value)
+    .then(ui.onUpdateGameSuccess)
+    .catch(ui.onUpdateGameFailure)
+
+  cells[index] = store.currentPlayer // change the local array
+  const winningMessage = checkIfWinner()
+
+  if (someoneWins === true) {
+    console.log('WIN')
+    console.log(winningMessage)
+    $('#message').text('player x won')
+    // if the cell that is clicked is empty and the board is not full, mark an x
+  } else if ($(event.target).text() === '' && !checkIfBoardFull()) {
+    // add the x or o to the board
+    $(event.target).text(store.currentPlayer)
+    console.log('someoneWins before we run checkWinner', someoneWins)
+    console.log('cells before we run checkWinner', cells)
+
+    // update API sending index, current player, game over (true or false)
+    changePlayer()
+    $('#message').html(`It's ${store.currentPlayer}'s turn`)
+  } else if (checkIfBoardFull()) {
+    $('#message').html('Board Full!')
+  } else if ($(event.target).text() !== '') {
+    $('#message').html('Invalid Move!')
+    console.log('theres an x/o here already')
+  }
+  // -----------------------------------------------------------change HTML text
+  // checkIfWinner()
+  // console.log('someoneWins', someoneWins)
+  // if (someoneWins === true) {
+  //   console.log('into check')
+  //   // stop game and then change html
+  //   // .off('click')
+  //   $('#message').text('Winner!')
+  // }
+}
+
+const checkIfBoardFull = function () {
+  for (let i = 0; i < cells.length; i++) {
+    if (cells[i] === '') {
+      return false
+    }
+  }
+  console.log('the gameboard is true')
+  return true
+}
+// ----------------------------------------------------to check if board is full
+const onGetGamesHistory = function (event) {
+  event.preventDefault()
+  console.log('hello')
+}
 
 // 1. if (we have a game) {}
 // 2. if (game is not over) {}
@@ -161,6 +163,5 @@ module.exports = {
   changePlayer,
   checkIfWinner,
   checkIfBoardFull,
-  onGetGamesHistory,
-  onClearGameBoard
+  onGetGamesHistory
 }

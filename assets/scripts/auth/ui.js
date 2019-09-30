@@ -32,8 +32,12 @@ const onSignInSuccess = function (responseData) {
   // so we can use it later from any file
   store.user = responseData.user // save the data from the server to your local
   // console.log('store is', store)
-  // $('#sign-in').hide()
-  // $('#sign-up').hide()
+  $('#new-game').show()
+  $('.game-button').show()
+  $('#get-games-history').show()
+  $('#sign-up').hide()
+  $('#sign-in').hide()
+  $('#change-password').hide()
   gameApi.newGame()
     .then(gameUi.onNewGameSuccess)
     .catch(gameUi.onNewGameFailure)
@@ -53,6 +57,7 @@ const onChangePasswordFailure = function () {
 
 const onSignOutSuccess = function () {
   successMessage('Signed out successfully!')
+  $('#sign-out').hide()
 }
 
 const onSignOutFailure = function () {
