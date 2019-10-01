@@ -29,10 +29,11 @@
 </ul>
 
 <h4>wireframes</h4>
-<a href="https://imgur.com/1Fwng52"> wireframe image</a>
+<img src="public/IMG_1199.jpeg">
 
 <h4>unsolved problems</h4>
 <ul>
-<li>still need to: get games (player stats)</li>
-<li>would like to eventually: remove the border from the game board, style the sign up/sign in page</li>
+<li>get games (player stats)</li>
+<li>would like to eventually...remove the border from the game board
+style the sign up/sign in page, change my html table to divs so that i can style with bootstrap, create a game that can be played across mobile and other devices</li>
 </ul>
