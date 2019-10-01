@@ -18,15 +18,15 @@ const failureMessage = function (newText) {
 }
 
 const onSignUpSuccess = function () {
-  successMessage('Signed up successfully!')
+  successMessage('signed up successfully!')
 }
 
 const onSignUpFailure = function () {
-  failureMessage('Sign up failed')
+  failureMessage('sign up failed')
 }
 // response Data is information back from the server (a user with email id and token)
 const onSignInSuccess = function (responseData) {
-  successMessage('Signed in successfully!')
+  successMessage('signed in successfully!')
   // console.log('responseData is', responseData)
   // save the 'user' we got from the API inside of 'store'
   // so we can use it later from any file
@@ -37,6 +37,8 @@ const onSignInSuccess = function (responseData) {
   $('#get-games-history').show()
   $('#sign-up').hide()
   $('#sign-in').hide()
+  $('#sign-out').show()
+  $('#sign-in').trigger('reset')
   $('#change-password').show()
   gameApi.newGame()
     .then(gameUi.onNewGameSuccess)
@@ -44,15 +46,15 @@ const onSignInSuccess = function (responseData) {
 }
 
 const onSignInFailure = function () {
-  failureMessage('Sign in failed')
+  failureMessage('sign in failed')
 }
 
 const onChangePasswordSuccess = function () {
-  successMessage('Changed password successfully!')
+  successMessage('changed password successfully!')
 }
 
 const onChangePasswordFailure = function () {
-  failureMessage('Change password failed')
+  failureMessage('change password failed')
 }
 
 const onSignOutSuccess = function () {
@@ -63,11 +65,11 @@ const onSignOutSuccess = function () {
   $('#sign-up').show()
   $('#sign-in').show()
   $('#change-password').hide()
-  successMessage('Signed out successfully!')
+  successMessage('signed out successfully!')
 }
 
 const onSignOutFailure = function () {
-  failureMessage('Sign out failed')
+  failureMessage('sign out failed')
 }
 module.exports = {
   onSignUpSuccess,

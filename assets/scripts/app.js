@@ -15,6 +15,7 @@ $(() => {
   $('#new-game').on('click', gameEvents.onNewGame)
   $('.game-button').on('click', gameEvents.onClickBoard)
   $('#get-games-history').on('click', gameEvents.onGetGamesHistory)
+  $('#sign-out').hide()
   $('#new-game').hide()
   $('.game-button').hide()
   $('#get-games-history').hide()

@@ -12,8 +12,9 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>tic-tac-toe</h1>
-      <h4 id="message">Welcome!</h4>
+      <h1>bobo's basic beta board</h1>
+      <h4 id="message">tictactoe: you vs. yourself</h4>
+      <br>
       <table id="table">
     <tr class="row">
         <td id="0" class="game-button" data-index='0'></td>
@@ -31,6 +32,7 @@
         <td id="8" class="game-button" data-index='8'></td>
     </tr>
 </table>
+
 <form id="sign-up">
   <input name="credentials[email]" type="text" placeholder="Enter email">
   <input name="credentials[password]" type="password" placeholder="Enter password">
@@ -43,15 +45,14 @@
     <input name="credentials[password]" type="password" placeholder="Enter password">
     <button>Sign In</button>
 </form>
-
+<br>
 <form id="change-password">
   <input name="passwords[old]" type="password" placeholder="Enter old password">
   <input name="passwords[new]" type="password" placeholder="Enter new password">
   <button>Change Password</button>
 </form>
-
+<br>
   <button id='new-game'>New Game</button>
-  <button id='get-games-history'>Get Games History</button>
   <button id='sign-out'>Sign Out</button>
 
     </body>

@@ -1,6 +1,6 @@
 'use strict'
 const store = require('../store')
-// const gameEvents = require('./events')
+const gameEvents = require('./events')
 
 const successMessage = function (newText) {
   $('#message').text(newText)
@@ -15,7 +15,8 @@ const failureMessage = function (newText) {
 }
 
 const onNewGameSuccess = function (responseData) {
-  successMessage(`Created new game successfully! It's ${store.currentPlayer}'s turn!`)
+  console.log('created new game')
+  successMessage(`you created a new game! it's ${store.currentPlayer}'s turn!`)
   store.game = responseData.game
 }
 
@@ -24,14 +25,16 @@ const onNewGameFailure = function () {
 }
 
 const onUpdateGameSuccess = function (responseData) {
-  // successMessage(gameEvents.currentPlayer + 'its your turn!')
+  console.log('update game success')
+  successMessage(gameEvents.currentPlayer + 'its your turn!')
   console.log('update success response', responseData)
   store.game = responseData.game
   console.log(store.game)
 }
 
 const onUpdateGameFailure = function (responseData) {
-  failureMessage('Sign out failed')
+  failureMessage('Update failed')
+  console.log('fail')
 }
 
 module.exports = {
