@@ -29,7 +29,7 @@
 </ul>
 
 <h4>wireframes</h4>
-<img src="./Desktop/IMG_199.jpeg">
+<a href="https://imgur.com/1Fwng52"> wireframe image</a>
 
 <h4>unsolved problems</h4>
 <ul>
