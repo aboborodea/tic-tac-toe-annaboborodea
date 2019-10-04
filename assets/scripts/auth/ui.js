@@ -7,22 +7,20 @@ const gameUi = require('../game/ui.js')
 
 const successMessage = function (newText) {
   $('#message').text(newText)
-  // $('#message').removeClass('failure')
-  // $('#message').addClass('success')
 }
 
 const failureMessage = function (newText) {
   $('#message').text(newText)
-  // $('#message').removeClass('success')
-  // $('#message').addClass('failure')
 }
 
 const onSignUpSuccess = function () {
   successMessage('signed up successfully!')
+  $('#sign-up').trigger('reset')
 }
 
 const onSignUpFailure = function () {
   failureMessage('sign up failed')
+  $('#sign-up').trigger('reset')
 }
 // response Data is information back from the server (a user with email id and token)
 const onSignInSuccess = function (responseData) {
@@ -51,10 +49,12 @@ const onSignInFailure = function () {
 
 const onChangePasswordSuccess = function () {
   successMessage('changed password successfully!')
+  $('#change-password').trigger('reset')
 }
 
 const onChangePasswordFailure = function () {
   failureMessage('change password failed')
+  $('#change-password').trigger('reset')
 }
 
 const onSignOutSuccess = function () {

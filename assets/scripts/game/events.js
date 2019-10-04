@@ -10,7 +10,7 @@ let someoneWins = false
 const checkIfWinner = function () {
   if (cells[0] === 'x' && cells[1] === 'x' && cells[2] === 'x') {
     someoneWins = true
-    console.log('win')
+    // console.log('win')
     return 'player x has won!'
   } else if (cells[3] === 'x' && cells[4] === 'x' && cells[5] === 'x') {
     someoneWins = true
@@ -74,7 +74,7 @@ const changePlayer = function () {
 
 const onNewGame = function (event) {
   // event.preventDefault()
-  console.log('new-game')
+  // console.log('new-game')
   $('.game-button').text('')
   store.currentPlayer = 'x' // reset current player back to x
   someoneWins = false // reset game over to false
@@ -89,24 +89,24 @@ const onClickBoard = function (event) {
   if ($(event.target).text() === '' && !someoneWins) { // if cell is empty and not someone wins
     const index = $(event.target).attr('data-index') // set index to number 0-8
     const value = store.currentPlayer // set value to x or o
-    console.log('index is', index)
+    // console.log('index is', index)
     $(event.target).text(store.currentPlayer) // change cell text to x or o
     cells[index] = store.currentPlayer // update local array
     const winningMessage = checkIfWinner() // returns player X or player o has won
     const boardFull = checkIfBoardFull()
     if (someoneWins === true) { // if someone wins is true
-      console.log('WIN')
-      console.log(winningMessage)
+      // console.log('WIN')
+      // console.log(winningMessage)
       $('#message').text(winningMessage) // change the text to the winning message
     } else if (boardFull === true) { // else, if board full
       $('#message').text("it's a tie!") // update message to 'tie'
     }
     $(event.target).text(store.currentPlayer)
-    console.log('TEST')
+    // console.log('TEST')
     api.updateGame(index, value, (someoneWins || boardFull))
       .then(ui.onUpdateGameSuccess)
       .catch(ui.onUpdateGameFailure)
-    console.log('responseData is')
+    // console.log('responseData is')
     changePlayer()
     if (!someoneWins) { // if someone wins is not true
       $('#message').html(`it's ${store.currentPlayer}'s turn`) // display 'players turn'
@@ -115,7 +115,7 @@ const onClickBoard = function (event) {
     $('#message').html('board full!')
   } else if ($(event.target).text() !== '') {
     $('#message').html('invalid move!')
-    console.log('theres an x/o here already')
+    // console.log('theres an x/o here already')
   }
 }
 // ---------------------------------------------------everytime board is clicked
@@ -126,14 +126,13 @@ const checkIfBoardFull = function () {
       return false
     }
   }
-  console.log('the gameboard is true')
+  // console.log('the gameboard is true')
   return true
 }
 // ----------------------------------------------------to check if board is full
 
 const onGetGamesHistory = function (event) {
   event.preventDefault()
-  console.log('hello')
 }
 
 module.exports = {
