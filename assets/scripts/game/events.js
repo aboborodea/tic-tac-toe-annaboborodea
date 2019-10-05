@@ -1,7 +1,9 @@
 'use strict'
 const store = require('../store')
 const api = require('./api.js')
-const ui = require('./ui.js')
+const ui = require('./ui')
+console.log(ui)
+console.log(api)
 
 // -----------------------------------------------------------------------import
 
@@ -132,7 +134,13 @@ const checkIfBoardFull = function () {
 // ----------------------------------------------------to check if board is full
 
 const onGetGamesHistory = function (event) {
+  console.log('in events')
   event.preventDefault()
+  // console.log('test')
+  console.log('successful', ui.historySuccessful, ui)
+  api.gamesHistory()
+    .then(ui.historySuccessful)
+    .catch(ui.historyFailure)
 }
 
 module.exports = {

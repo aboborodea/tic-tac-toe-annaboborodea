@@ -1,6 +1,6 @@
 'use strict'
 const store = require('../store')
-const gameEvents = require('./events')
+// const gameEvents = require('./events')
 
 const successMessage = function (newText) {
   $('#message').text(newText)
@@ -26,7 +26,7 @@ const onNewGameFailure = function () {
 
 const onUpdateGameSuccess = function (responseData) {
   // console.log('update game success')
-  successMessage(gameEvents.currentPlayer + 'its your turn!')
+  successMessage(store.currentPlayer + 'its your turn!')
   // console.log('update success response', responseData)
   store.game = responseData.game
   // console.log(store.game)
@@ -36,15 +36,15 @@ const onUpdateGameFailure = function (responseData) {
   failureMessage('Update failed')
 }
 
-const onGamesHistorySuccess = function (responseData) {
-  console.log('get game history success')
-  successMessage(gameEvents.currentPlayer + 'its your turn!')
-  // console.log('update success response', responseData)
-  store.game = responseData.game
-  // console.log(store.game)
+const historySuccessful = function (responseData) {
+  console.log('test')
+  console.log(responseData)
+  console.log(responseData.games.length)
+  $('#total-games').text(responseData.games.length)
 }
 
-const onGamesHistoryFailure = function (responseData) {
+const historyFailure = function (responseData) {
+  console.log('Failure')
   failureMessage('Get games history failed')
 }
 
@@ -53,6 +53,6 @@ module.exports = {
   onNewGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure,
-  onGamesHistorySuccess,
-  onGamesHistoryFailure
+  historySuccessful,
+  historyFailure
 }
