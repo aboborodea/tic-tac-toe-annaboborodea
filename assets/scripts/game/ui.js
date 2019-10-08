@@ -26,6 +26,7 @@ const onNewGameFailure = function () {
 
 const onUpdateGameSuccess = function (responseData) {
   // console.log('update game success')
+  if someoneWins ===
   successMessage(store.currentPlayer + ' its your turn!')
   // console.log('update success response', responseData)
   store.game = responseData.game

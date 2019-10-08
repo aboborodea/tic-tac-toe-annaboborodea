@@ -111,7 +111,7 @@ const onClickBoard = function (event) {
     // console.log('responseData is')
     changePlayer()
     if (!someoneWins) { // if someone wins is not true
-      $('#message').html(`it's ${store.currentPlayer}'s turn`) // display 'players turn'
+      // $('#message').html(`it's ${store.currentPlayer}'s turn`) // display 'players turn'
     }
   } else if (checkIfBoardFull()) {
     $('#message').html('board full!')
