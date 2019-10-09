@@ -63,6 +63,7 @@ const onSignOutSuccess = function () {
   $('#sign-up').show()
   $('#sign-in').show()
   $('#change-password').hide()
+  $('#total-games').text('')
   successMessage('signed out successfully!')
 }
 

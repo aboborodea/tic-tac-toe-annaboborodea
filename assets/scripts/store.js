@@ -2,7 +2,8 @@
 
 const store = {
   currentPlayer: 'x',
-  someoneWins: false
+  someoneWins: false,
+  boardFull: false
 }
 
 module.exports = store

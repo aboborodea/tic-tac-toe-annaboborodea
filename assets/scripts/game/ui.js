@@ -23,7 +23,7 @@ const onNewGameFailure = function () {
 }
 
 const onUpdateGameSuccess = function (responseData) {
-  if (store.someoneWins === false) {
+  if (store.someoneWins === false && store.boardFull === false) {
     successMessage(store.currentPlayer + ' its your turn!')
   }
   store.game = responseData.game

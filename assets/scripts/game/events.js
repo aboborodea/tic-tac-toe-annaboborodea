@@ -74,6 +74,7 @@ const onNewGame = function (event) {
   $('.game-button').text('')
   store.currentPlayer = 'x' // reset current player back to x
   store.someoneWins = false // reset game over to false
+  store.boardfull = false
   cells = ['', '', '', '', '', '', '', '', '']
   api.newGame()
     .then(ui.onNewGameSuccess)
@@ -87,14 +88,14 @@ const onClickBoard = function (event) {
     $(event.target).text(store.currentPlayer) // change cell text to x or o
     cells[index] = store.currentPlayer // update local array
     const winningMessage = checkIfWinner() // returns player X or player o has won
-    const boardFull = checkIfBoardFull()
+    // const boardFull = checkIfBoardFull()
     if (store.someoneWins === true) { // if someone wins is true
       $('#message').text(winningMessage) // change the text to the winning message
-    } else if (boardFull === true) { // else, if board full
+    } else if (checkIfBoardFull() === true) { // else, if board full
       $('#message').text("it's a tie!") // update message to 'tie'
     }
     $(event.target).text(store.currentPlayer)
-    api.updateGame(index, value, (store.someoneWins || boardFull))
+    api.updateGame(index, value, (store.someoneWins || checkIfBoardFull()))
       .then(ui.onUpdateGameSuccess)
       .catch(ui.onUpdateGameFailure)
     changePlayer()
@@ -112,9 +113,11 @@ const onClickBoard = function (event) {
 const checkIfBoardFull = function () {
   for (let i = 0; i < cells.length; i++) {
     if (cells[i] === '') {
+      store.boardFull = false
       return false
     }
   }
+  store.boardFull = true
   return true
 }
 // ----------------------------------------------------to check if board is full
