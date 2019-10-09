@@ -25,11 +25,9 @@ const onSignUpFailure = function () {
 // response Data is information back from the server (a user with email id and token)
 const onSignInSuccess = function (responseData) {
   successMessage('signed in successfully!')
-  // console.log('responseData is', responseData)
   // save the 'user' we got from the API inside of 'store'
   // so we can use it later from any file
   store.user = responseData.user // save the data from the server to your local
-  // console.log('store is', store)
   $('#new-game').show()
   $('.game-button').show()
   $('#get-games-history').show()
