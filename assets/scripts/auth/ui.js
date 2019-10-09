@@ -43,6 +43,7 @@ const onSignInSuccess = function (responseData) {
 
 const onSignInFailure = function () {
   failureMessage('sign in failed')
+  $('#sign-in').trigger('reset')
 }
 
 const onChangePasswordSuccess = function () {
