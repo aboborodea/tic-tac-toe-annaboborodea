@@ -12,10 +12,10 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>bobo's basic beta board</h1>
-      <h4 id="message">tictactoe: you vs. yourself</h4>
+      <h1 class="header">bobo's basic beta board</h1>
+      <h4 id="message" class="subheader">tictactoe: you vs. yourself</h4>
       <br>
-      <table id="table">
+      <table class="table" id="table">
     <tr class="row">
         <td id="0" class="game-button" data-index='0'></td>
         <td id="1" class="game-button" data-index='1'></td>
@@ -33,29 +33,29 @@
     </tr>
 </table>
 
-<form id="sign-up">
+<form class="sign-up" id="sign-up">
   <input name="credentials[email]" type="text" placeholder="Enter email">
   <input name="credentials[password]" type="password" placeholder="Enter password">
   <input name="credentials[password_confirmation]" type="password" placeholder="Enter password again">
   <button>Sign Up</button>
 </form>
 
-<form id="sign-in">
+<form class="sign-in" id="sign-in">
     <input name="credentials[email]" type="text" placeholder="Enter email">
     <input name="credentials[password]" type="password" placeholder="Enter password">
     <button>Sign In</button>
 </form>
 <br>
-<form id="change-password">
+<form class="change-password" id="change-password">
   <input name="passwords[old]" type="password" placeholder="Enter old password">
   <input name="passwords[new]" type="password" placeholder="Enter new password">
   <button>Change Password</button>
 </form>
 <br>
   <button id='new-game'>New Game</button>
-  <button id='sign-out'>Sign Out</button>
-  <button id='get-games-history'>Total Games</button>
-  <p id='total-games'></p>
+  <button class="sign-out" id='sign-out'>Sign Out</button>
+  <button class="get-games-history" id='get-games-history'>Total Games</button>
+  <p class="total-games" id='total-games'></p>
 
     </body>
 </html>

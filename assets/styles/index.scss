@@ -1,8 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
 
+.change-password {
+  display: flex;
+  justify-content: center;
+}
+
+.get-games-history {
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  display: flex;
+  justify-content: center;
+}
 
 td {
-  border: 1px solid;
+  border: 3px solid;
   height: 200px;
   width: 200px;
   font-size: 100px;
@@ -10,5 +29,31 @@ td {
 }
 
 .row {
+  border: 3px solid;
   margin-left: 15px;
+}
+
+.subheader {
+  display: flex;
+  justify-content: center;
+}
+
+.sign-in {
+  display: flex;
+  justify-content: center;
+}
+
+.sign-up {
+  display: flex;
+  justify-content: center;
+}
+
+.sign-out {
+  display: flex;
+  justify-content: center;
+}
+
+.total-games {
+  display: flex;
+  justify-content: center;
 }
