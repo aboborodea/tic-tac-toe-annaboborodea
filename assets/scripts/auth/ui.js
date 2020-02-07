@@ -35,6 +35,7 @@ const onSignInSuccess = function (responseData) {
   $('#sign-out').show()
   $('#sign-in').trigger('reset')
   $('#change-password').show()
+  $('.computerTurn').show()
   gameApi.newGame()
     .then(gameUi.onNewGameSuccess)
     .catch(gameUi.onNewGameFailure)

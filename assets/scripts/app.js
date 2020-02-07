@@ -20,4 +20,7 @@ $(() => {
   $('.game-button').hide()
   $('#get-games-history').hide()
   $('#change-password').hide()
+  $('.computerTurn').hide()
+  $('.computerTurn').on('click', gameEvents.onComputerTurn)
+  $('.computerTurn').prop('disabled', true)
 })

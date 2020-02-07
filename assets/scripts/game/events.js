@@ -86,7 +86,7 @@ const onClickBoard = function (event) {
     const index = $(event.target).attr('data-index') // set index to number 0-8
     const value = store.currentPlayer // set value to x or o
     $(event.target).text(store.currentPlayer) // change cell text to x or o
-    cells[index] = store.currentPlayer // update local array
+    cells[index] = store.currentPlayer // update local array with a string of x or o
     const winningMessage = checkIfWinner() // returns player X or player o has won
     // const boardFull = checkIfBoardFull()
     if (store.someoneWins === true) { // if someone wins is true
@@ -95,6 +95,7 @@ const onClickBoard = function (event) {
       $('#message').text("it's a tie!") // update message to 'tie'
     }
     $(event.target).text(store.currentPlayer)
+    // update the api if someoneWins is trie or if checkIfBoard is true
     api.updateGame(index, value, (store.someoneWins || checkIfBoardFull()))
       .then(ui.onUpdateGameSuccess)
       .catch(ui.onUpdateGameFailure)
@@ -107,9 +108,47 @@ const onClickBoard = function (event) {
   } else if ($(event.target).text() !== '') {
     $('#message').html('invalid move!')
   }
+  // enable computer turn button
+  $('.computerTurn').prop('disabled', false)
 }
 // ---------------------------------------------------everytime board is clicked
 
+const onComputerTurn = function () {
+  const value = store.currentPlayer // set value to x or o
+  console.log(store.game.cells) // the array of cells
+  // get a count of number of empty cells to be able to choose from for ai player
+  // loop through the array of cells using a loop to create a new array of the indeces of empty cells
+  // ie. if game board is completely empty, it will take all of the indeces
+  let emptyCells = []
+  for (let i = 0; i < cells.length; i++) {
+    // if the board at index i is empty, push that index into emptyCells array
+    if (cells[i] === '') {
+      emptyCells.push(i)
+    }
+  }
+  // randomly pick an empty cell
+  // math.random gives you a float between 0 and 1, mulitply by the length of empty cells gives you a float, and then round down with math.floor
+  const randCell = Math.floor(Math.random() * emptyCells.length)
+  // start at the table, going through all of the children of the table and find the child with teh data-index of the randCell 
+  const randomBoardCell = $(".table").find(`[data-index='${randCell}']`)
+  // change the text of the cell to 'o'
+  randomBoardCell.text(store.currentPlayer)
+
+  // add an o to the global cells array
+  cells[randCell] = store.currentPlayer
+  // check if winner before sending to the API
+  checkIfWinner()
+  // update API
+  api.updateGame(randCell, value, (store.someoneWins || checkIfBoardFull()))
+    .then(ui.onUpdateGameSuccess)
+    .catch(ui.onUpdateGameFailure)
+  changePlayer()
+  console.log('emptyCells is', emptyCells)
+  // disable computer turn button 
+  $('.computerTurn').prop('disabled', true)
+}
+
+// ---------------------------------------------------onComputerTurn function
 const checkIfBoardFull = function () {
   for (let i = 0; i < cells.length; i++) {
     if (cells[i] === '') {
@@ -135,5 +174,6 @@ module.exports = {
   changePlayer,
   checkIfWinner,
   checkIfBoardFull,
-  onGetGamesHistory
+  onGetGamesHistory,
+  onComputerTurn
 }
