@@ -128,8 +128,10 @@ const onComputerTurn = function () {
   }
   // randomly pick an empty cell
   // math.random gives you a float between 0 and 1, mulitply by the length of empty cells gives you a float, and then round down with math.floor
-  const randCell = Math.floor(Math.random() * emptyCells.length)
-  // start at the table, going through all of the children of the table and find the child with teh data-index of the randCell 
+  const randIndex = Math.floor(Math.random() * emptyCells.length)
+  //change the index in the emptyCells into the index in the Cells
+  const randCell = emptyCells[randIndex]
+  // start at the table, going through all of the children of the table and find the child with the data-index of the randCell 
   const randomBoardCell = $(".table").find(`[data-index='${randCell}']`)
   // change the text of the cell to 'o'
   randomBoardCell.text(store.currentPlayer)
