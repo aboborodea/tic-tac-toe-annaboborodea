@@ -57,6 +57,7 @@ const checkIfWinner = function () {
     return 'playerx o won!'
   } else {
     return -1
+   
   }
 }
 // -----------------------------------------------------------to check if winner
@@ -108,8 +109,9 @@ const onClickBoard = function (event) {
   } else if ($(event.target).text() !== '') {
     $('#message').html('invalid move!')
   }
-  // enable computer turn button
-  $('.computerTurn').prop('disabled', false)
+  if (store.someoneWins === false) {
+    $('.computerTurn').prop('disabled', false)
+  }
 }
 // ---------------------------------------------------everytime board is clicked
 
