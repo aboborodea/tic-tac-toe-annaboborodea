@@ -23,4 +23,6 @@ $(() => {
   $('.computerTurn').hide()
   $('.computerTurn').on('click', gameEvents.onComputerTurn)
   $('.computerTurn').prop('disabled', true)
+  $('.playYourSelf').on('click', gameEvents.onClickBoard)
+  $('.playComputer').on('click', gameEvents.onComputerTurn)
 })
