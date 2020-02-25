@@ -117,6 +117,7 @@ const onClickBoard2 = function (event) {
 
 const onNewGame = function (event) {
   $('.game-button').text('')
+  $('.game-button').off('click')
   $('.game-button').on('click', onClickBoard)
   store.currentPlayer = 'x' // reset current player back to x
   store.someoneWins = false // reset game over to false
@@ -128,6 +129,7 @@ const onNewGame = function (event) {
 }
 
 const onNewGame2 = function (event) {
+  $('.game-button').off('click')
   $('.game-button').on('click', onClickBoard2)
   $('.game-button').text('')
   store.currentPlayer = 'x' // reset current player back to x
