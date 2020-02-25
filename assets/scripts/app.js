@@ -24,5 +24,6 @@ $(() => {
   $('.computerTurn').on('click', gameEvents.onComputerTurn)
   $('.computerTurn').prop('disabled', true)
   $('.playYourSelf').on('click', gameEvents.onNewGame)
-  $('.playComputer').on('click', gameEvents.onComputerTurn)
+  $('.playComputer').on('click', gameEvents.onNewGame2)
 })
+

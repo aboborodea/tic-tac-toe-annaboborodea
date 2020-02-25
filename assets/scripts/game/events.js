@@ -71,18 +71,6 @@ const changePlayer = function () {
 }
 // ----------------------------------------------------------------change player
 
-const onNewGame = function (event) {
-  $('.game-button').text('')
-  $('.game-button').on('click', onClickBoard)
-  store.currentPlayer = 'x' // reset current player back to x
-  store.someoneWins = false // reset game over to false
-  store.boardfull = false
-  cells = ['', '', '', '', '', '', '', '', '']
-  api.newGame()
-    .then(ui.onNewGameSuccess)
-    .catch(ui.onNewGameFailure)
-}
-
 const onClickBoard = function (event) {
   if ($(event.target).text() === '' && !store.someoneWins) { // if cell is empty and not someone wins
     const index = $(event.target).attr('data-index') // set index to number 0-8
@@ -114,7 +102,43 @@ const onClickBoard = function (event) {
     $('.computerTurn').prop('disabled', false)
   }
 }
+
+const onClickBoard2 = function (event) {
+  console.log('click')
+  onClickBoard(event)
+  // only if the the board is not full or there is a tie, we run onComputerTurn()
+  if (store.boardFull === false && store.someoneWins === false) {
+    console.log('ai choose')
+    onComputerTurn()
+  }
+}
+
 // ---------------------------------------------------everytime board is clicked
+
+const onNewGame = function (event) {
+  $('.game-button').text('')
+  $('.game-button').on('click', onClickBoard)
+  store.currentPlayer = 'x' // reset current player back to x
+  store.someoneWins = false // reset game over to false
+  store.boardfull = false
+  cells = ['', '', '', '', '', '', '', '', '']
+  api.newGame()
+    .then(ui.onNewGameSuccess)
+    .catch(ui.onNewGameFailure)
+}
+
+const onNewGame2 = function (event) {
+  $('.game-button').on('click', onClickBoard2)
+  $('.game-button').text('')
+  store.currentPlayer = 'x' // reset current player back to x
+  store.someoneWins = false // reset game over to false
+  store.boardfull = false
+  cells = ['', '', '', '', '', '', '', '', '']
+  api.newGame()
+    .then(ui.onNewGameSuccess)
+    .catch(ui.onNewGameFailure)
+}
+// -------------------------------------new game each time user selects self play or ai
 
 const onComputerTurn = function () {
   const value = store.currentPlayer // set value to x or o
@@ -180,5 +204,7 @@ module.exports = {
   checkIfWinner,
   checkIfBoardFull,
   onGetGamesHistory,
-  onComputerTurn
+  onComputerTurn,
+  onNewGame2,
+  onClickBoard2
 }
