@@ -73,6 +73,7 @@ const changePlayer = function () {
 
 const onNewGame = function (event) {
   $('.game-button').text('')
+  $('.game-button').on('click', onClickBoard)
   store.currentPlayer = 'x' // reset current player back to x
   store.someoneWins = false // reset game over to false
   store.boardfull = false
