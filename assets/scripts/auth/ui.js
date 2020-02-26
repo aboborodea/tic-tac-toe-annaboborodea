@@ -28,6 +28,8 @@ const onSignInSuccess = function (responseData) {
   // so we can use it later from any file
   store.user = responseData.user // save the data from the server to your local
   $('#new-game').show()
+  $('.playComputer').show()
+  $('.playYourSelf').show()
   $('.game-button').show()
   $('#get-games-history').show()
   $('#sign-up').hide()

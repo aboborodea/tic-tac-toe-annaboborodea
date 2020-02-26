@@ -147,7 +147,7 @@ const onComputerTurn = function () {
   console.log(store.game.cells) // the array of cells
   // get a count of number of empty cells to be able to choose from for ai player
   // loop through the array of cells using a loop to create a new array of the indeces of empty cells
-  // ie. if game board is completely empty, it will take all of the indeces
+  // ie. if game board is completely empty, it will take all of the indices
   let emptyCells = []
   for (let i = 0; i < cells.length; i++) {
     // if the board at index i is empty, push that index into emptyCells array

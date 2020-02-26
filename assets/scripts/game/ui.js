@@ -2,12 +2,14 @@
 const store = require('../store')
 
 const successMessage = function (newText) {
+  $('#message').css('color', '#ff6ec7')
   $('#message').text(newText)
   $('#message').removeClass('failure')
   $('#message').addClass('success')
 }
 
 const failureMessage = function (newText) {
+  $('#message').css('color', 'red')
   $('#message').text(newText)
   $('#message').removeClass('success')
   $('#message').addClass('failure')
@@ -25,6 +27,7 @@ const onNewGameFailure = function () {
 const onUpdateGameSuccess = function (responseData) {
   // if someoneWins is false AND boardFull is false, send message
   if (store.someoneWins === false && store.boardFull === false) {
+    $('#message').css('color', 'pink')
     successMessage(store.currentPlayer + ' its your turn!')
   }
   // store current version of the game into a variable

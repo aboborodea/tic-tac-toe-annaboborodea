@@ -12,8 +12,6 @@ $(() => {
   $('#sign-in').on('submit', authEvents.onSignIn)
   $('#sign-out').on('click', authEvents.onSignOut)
   $('#change-password').on('submit', authEvents.onChangePassword)
-  // $('#new-game').on('click', gameEvents.onNewGame)
-  // $('.game-button').on('click', gameEvents.onClickBoard)
   $('#get-games-history').on('click', gameEvents.onGetGamesHistory)
   $('#sign-out').hide()
   $('#new-game').hide()
@@ -25,5 +23,7 @@ $(() => {
   $('.computerTurn').prop('disabled', true)
   $('.playYourSelf').on('click', gameEvents.onNewGame)
   $('.playComputer').on('click', gameEvents.onNewGame2)
+  $('.playYourSelf').hide()
+  $('.playComputer').hide()
 })
 
