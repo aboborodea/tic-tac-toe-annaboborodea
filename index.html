@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>TicTacToe</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <div class="landingPage"></div>
+      <h1 class="header">bobo's basic beta board</h1>
+      <h4 id="message" class="subheader">tictactoe: you vs. yourself</h4>
+      <br>
+    </div>
+      <div class="playerOptions">
+      <button class="playComputer">Play Against Computer</button>
+      <button class="playYourSelf">Play Against Yourself</button>
+      </div>
+      <br>
+  <table class="table" id="table">
+    <tr class="row">
+        <td id="0" class="game-button" data-index='0'></td>
+        <td id="1" class="game-button" data-index='1'></td>
+        <td id="2" class="game-button" data-index='2'></td>
+    </tr>
+    <tr class="row">
+        <td id="3" class="game-button" data-index='3'></td>
+        <td id="4" class="game-button" data-index='4'></td>
+        <td id="5" class="game-button" data-index='5'></td>
+    </tr>
+    <tr class="row">
+        <td id="6" class="game-button" data-index='6'></td>
+        <td id="7" class="game-button" data-index='7'></td>
+        <td id="8" class="game-button" data-index='8'></td>
+    </tr>
+</table>
+
+
+<form class="sign-up" id="sign-up">
+  <input name="credentials[email]" type="text" placeholder="Enter email">
+  <input name="credentials[password]" type="password" placeholder="Enter password">
+  <input name="credentials[password_confirmation]" type="password" placeholder="Enter password again">
+  <button>Sign Up</button>
+</form>
+
+<form class="sign-in" id="sign-in">
+    <input name="credentials[email]" type="text" placeholder="Enter email">
+    <input name="credentials[password]" type="password" placeholder="Enter password">
+    <button>Sign In</button>
+</form>
+<br>
+<form class="change-password" id="change-password">
+  <input name="passwords[old]" type="password" placeholder="Enter old password">
+  <input name="passwords[new]" type="password" placeholder="Enter new password">
+  <button>Change Password</button>
+</form>
+<br>
+  <!-- <button id='new-game'>New Game</button> -->
+  <button class="sign-out" id='sign-out'>Sign Out</button>
+  <button class="get-games-history" id='get-games-history'>Total Games</button>
+  <p class="total-games" id='total-games'></p>
+
+    </body>
+</html>
